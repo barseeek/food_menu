@@ -72,10 +72,21 @@ class Recipe(models.Model):
         related_name='recipies'
     )
 
+    def save(self, *args, **kwargs):
+        ingredients = self.ingredients.all()
+        calories = [
+            (
+                ingredient.product.calories *
+                ingredient.quantity *
+                ingredient.grams /
+                100
+            ) for ingredient in ingredients
+        ]
+        self.calories = sum(calories)
+        super(Subscription, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.title
-
-    # добавить расчет общей калорийности
 
 
 class Ingredient(models.Model):
@@ -141,7 +152,7 @@ class Subscription(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        self.end_date = self.start_date + relativedelta(months=int(self.months))
+        self.end = self.start + relativedelta(months=int(self.months))
         super(Subscription, self).save(*args, **kwargs)
 
     def __str__(self):
