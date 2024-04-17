@@ -43,6 +43,16 @@ class Menu(models.Model):
         return self.title
 
 
+class Category(models.Model):
+    title = models.CharField(
+        verbose_name='Категория (Время дня)',
+        max_length=25
+    )
+
+    def __str__(self):
+        return self.title
+
+
 class Recipe(models.Model):
     title = models.CharField(
         verbose_name='Название',
@@ -51,20 +61,15 @@ class Recipe(models.Model):
     description = models.TextField(
         verbose_name='Описание'
     )
-    category = models.CharField(
+    categories = models.ManyToManyField(
+        Category,
         verbose_name='Категория (Время дня)',
-        max_length=25,
-        choices=(
-            ('Нет', 'Нет'),
-            ('Завтрак', 'Завтрак'),
-            ('Обед', 'Обед'),
-            ('Ужин', 'Ужин'),
-            ('Десерт', 'Десерт')
-        ),
-        default='Нет'
+        related_name='categories'
     )
     calories = models.PositiveIntegerField(
-        verbose_name='Общая калорийность'
+        verbose_name='Общая калорийность',
+        blank=True,
+        default=0
     )
     menus = models.ManyToManyField(
         Menu,
@@ -83,7 +88,7 @@ class Recipe(models.Model):
             ) for ingredient in ingredients
         ]
         self.calories = sum(calories)
-        super(Subscription, self).save(*args, **kwargs)
+        super(Recipe, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -99,13 +104,15 @@ class Ingredient(models.Model):
         Recipe,
         verbose_name='Рецепт',
         related_name='ingredients',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
     unit = models.CharField(
         verbose_name='Единица измерения',
         max_length=10,
     )
-    quantity = models.PositiveIntegerField(
+    quantity = models.FloatField(
         verbose_name='Количество'
     )
     grams = models.PositiveIntegerField(

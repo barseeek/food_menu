@@ -1,10 +1,12 @@
 from django.contrib import admin
 
 from myapp.models import CustomUser, Subscription, Ingredient, Recipe, Menu, \
-    Product
+    Product, Category
 
 
-# Register your models here.
+class IngredientInline(admin.TabularInline):
+    model = Ingredient
+
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
@@ -23,7 +25,7 @@ class IngredientAdmin(admin.ModelAdmin):
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    pass
+    inlines = [IngredientInline]
 
 
 @admin.register(Menu)
@@ -33,4 +35,9 @@ class MenuAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
     pass
