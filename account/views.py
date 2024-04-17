@@ -3,14 +3,16 @@ from django.contrib.auth import login
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
+from orderapp.models import CustomUser
+
 
 def user_login(request):
     if request.method == 'POST':
         email = request.POST.get('exampleInputEmail1')
         password = request.POST.get('exampleInputPassword1')
         try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
             return None
         else:
             if not user.check_password(password):
@@ -34,10 +36,10 @@ def register_user(request):
         second_password = request.POST.get('exampleInputSecondPassword')
         if not second_password == password:
             return HttpResponse('Пароли не совпадают')
-        user = User.objects.filter(email=email)
+        user = CustomUser.objects.filter(email=email)
         if user:
             return HttpResponse('You have already created account')
-        user = User.objects.create(
+        user = CustomUser.objects.create(
             first_name=name,
             email=email,
             username=email,
