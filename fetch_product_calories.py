@@ -28,7 +28,7 @@ def fetch_product_calories(title):
 
 
 if __name__ == '__main__':
-    word = 'Пармезан'
+    word = 'Сушеный розмарин'
 
     calories = fetch_product_calories(word)
     print(calories)
