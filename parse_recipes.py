@@ -1,9 +1,11 @@
+import re
 from urllib.parse import urljoin, urlsplit
 import json
 import requests
 from bs4 import BeautifulSoup
 import ftfy
 
+from fetch_product_calories import fetch_product_calories
 
 if __name__ == '__main__':
     base_url = 'https://eda.ru/'
@@ -17,7 +19,7 @@ if __name__ == '__main__':
         urljoin(base_url, f'recepty/{diet}/{meal}') for meal in meals for diet in diets
     ]
     recipies = []
-    for link in links[:2]:
+    for link in links:
         try:
             response = requests.get(link)
             response.raise_for_status()
@@ -40,8 +42,10 @@ if __name__ == '__main__':
 
                     title = soup.find('h1', class_='emotion-gl52ge').text
                     title = ftfy.fix_text(title)
-
-                    image = soup.find('img', class_='emotion-gxbcya').get('src')
+                    print(recipe_url)
+                    image = soup.find('img', class_='emotion-gxbcya')
+                    if image:
+                        image = image.get('src')
 
                     description = [post.text for post in soup.select('div.emotion-13pa6yw span.emotion-wdt5in')]
                     description = '\n'.join(description)
@@ -55,8 +59,22 @@ if __name__ == '__main__':
                     menu = zipped_diets[menu]
 
                     ingredients_titles = [title.text for title in soup.select('span.emotion-mdupit')]
-                    ingredients_units = [unit.text for unit in soup.select('span.emotion-bsdd3p')]
+                    ingredients_units = [[{'Amount': unit.text}] for unit in soup.select('span.emotion-bsdd3p')]
                     ingredients = dict(zip(ingredients_titles, ingredients_units))
+
+                    for k, v in ingredients.items():
+                        match = re.search(r'\d+\.?\,?\d*', v[0]['Amount'])
+                        if not match:
+                            amount = 0
+                        else:
+                            match_value = match.group(0)
+                            if ',' in match_value:
+                                match_value = match_value.replace(',', '.')
+                            amount = float(match_value)
+                        print('1', (k, v[0]['Amount']))
+                        ingredient_info = fetch_product_calories(k, v[0]['Amount'])
+                        calories_amount = ingredient_info[k][0] * amount
+                        ingredients[k].append({'Calories': calories_amount})
 
                     parsed_recipe = {
                         'title': title,
@@ -69,5 +87,5 @@ if __name__ == '__main__':
                     recipies.append(parsed_recipe)
 
     json_str = json.dumps(recipies, indent=4, ensure_ascii=False)
-    with open('data.json', 'w', encoding='utf-8') as f:
+    with open('recipies_database.json', 'w', encoding='utf-8') as f:
         f.write(json_str)
