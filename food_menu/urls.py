@@ -18,12 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from orderapp import views
-
+from orderapp.views import index
 
 urlpatterns = [
-    path('', views.home, name='index'),
-    path('order/', views.order, name='order'),
+    path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
+    path('orderapp/', include('orderapp.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
+
 # Create your models here.
 
 
@@ -14,19 +15,13 @@ class Product(models.Model):
     calories = models.PositiveIntegerField(
         verbose_name='ккал/100г'
     )
-    category = models.CharField(
-        verbose_name='Категория (Аллергии)',
-        max_length=25,
-        choices=(
-            ('Нет', 'Нет'),
-            ('Рыба и морепродукты', 'Рыба и морепродукты'),
-            ('Мясо', 'Мясо'),
-            ('Зерновые', 'Зерновые'),
-            ('Продукты пчеловодства', 'Продукты пчеловодства'),
-            ('Орехи и бобовые', 'Орехи и бобовые'),
-            ('Молочные продукты', 'Молочные продукты'),
-        ),
-        default='Нет'
+    category = models.ForeignKey(
+        'Allergy',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Категория (аллергия)',
+        related_name='products'
     )
 
     def __str__(self):
@@ -47,6 +42,16 @@ class Category(models.Model):
     title = models.CharField(
         verbose_name='Категория (Время дня)',
         max_length=25
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class Allergy(models.Model):
+    title = models.CharField(
+        verbose_name='Аллерген',
+        max_length=100
     )
 
     def __str__(self):
@@ -81,10 +86,10 @@ class Recipe(models.Model):
         ingredients = self.ingredients.all()
         calories = [
             (
-                ingredient.product.calories *
-                ingredient.quantity *
-                ingredient.grams /
-                100
+                    ingredient.product.calories *
+                    ingredient.quantity *
+                    ingredient.grams /
+                    100
             ) for ingredient in ingredients
         ]
         self.calories = sum(calories)
@@ -156,6 +161,22 @@ class Subscription(models.Model):
         verbose_name='Тип меню',
         on_delete=models.CASCADE,
         related_name='subscriptions'
+    )
+    breakfast = models.BooleanField(
+        verbose_name='Включены завтраки',
+        default=False
+    )
+    lunch = models.BooleanField(
+        verbose_name='Включены обеды',
+        default=False
+    )
+    dinner = models.BooleanField(
+        verbose_name='Включены ужины',
+        default=False
+    )
+    dessert = models.BooleanField(
+        verbose_name='Включены дессерты',
+        default=False
     )
 
     def save(self, *args, **kwargs):
