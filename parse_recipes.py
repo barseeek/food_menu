@@ -59,11 +59,11 @@ if __name__ == '__main__':
                     menu = zipped_diets[menu]
 
                     ingredients_titles = [title.text for title in soup.select('span.emotion-mdupit')]
-                    ingredients_units = [[{'Amount': unit.text}] for unit in soup.select('span.emotion-bsdd3p')]
+                    ingredients_units = [{'Amount': unit.text} for unit in soup.select('span.emotion-bsdd3p')]
                     ingredients = dict(zip(ingredients_titles, ingredients_units))
 
                     for k, v in ingredients.items():
-                        match = re.search(r'\d+\.?\,?\d*', v[0]['Amount'])
+                        match = re.search(r'\d+\.?\,?\d*', v['Amount'])
                         if not match:
                             amount = 0
                         else:
@@ -71,10 +71,10 @@ if __name__ == '__main__':
                             if ',' in match_value:
                                 match_value = match_value.replace(',', '.')
                             amount = float(match_value)
-                        print('1', (k, v[0]['Amount']))
-                        ingredient_info = fetch_product_calories(k, v[0]['Amount'])
+
+                        ingredient_info = fetch_product_calories(k, v['Amount'])
                         calories_amount = ingredient_info[k][0] * amount
-                        ingredients[k].append({'Calories': calories_amount})
+                        ingredients[k]['Calories'] = calories_amount
 
                     parsed_recipe = {
                         'title': title,

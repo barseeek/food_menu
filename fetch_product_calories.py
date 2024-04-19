@@ -15,6 +15,9 @@ FS_TOKEN = env.str('FS_TOKEN')
 def fetch_product_calories(title, unit):
     initial_unit = unit
     initial_title = title
+    title = re.sub(r'\([^)]*\)', '', title)
+    if 'без' in title:
+        title = title.split('без')[0].strip()
     words = title.split()
     if len(words) >= 2:
         last_two_words = words[-2:]
@@ -22,7 +25,7 @@ def fetch_product_calories(title, unit):
 
     translator = Translator()
     translation = translator.translate(title, src='ru', dest='en').text
-    units = {'чай': ['tsp'], 'стол': ['tbsp'], 'шт': ['serving', 'slice', translation], 'стакан': ['cup',]}
+    units = {'чай': ['tsp'], 'стол': ['tbsp'], 'шт': ['serving', 'slice', translation, 'cereal'], 'стакан': ['cup',]}
     units_to_find = ['100g']
     for key in units.keys():
         if key in initial_unit.lower():
@@ -39,7 +42,7 @@ def fetch_product_calories(title, unit):
         return e
     else:
         answer = response.json()
-        #pprint.pprint(answer)
+
         if int(answer['foods']['total_results']) > 0:
             foods = answer['foods']['food']
 
@@ -48,12 +51,12 @@ def fetch_product_calories(title, unit):
                 food_description = foods['food_description']
             else:
                 food_description = foods[0]['food_description']
-                print(food_description)
+
                 found_match = False
                 for food in foods:
                     for unit_to_find in units_to_find:
                         if unit_to_find.lower() in food['food_description']:
-                            print(1)
+
                             food_description = food['food_description']
                             unit = initial_unit
                             found_match = True
@@ -62,7 +65,7 @@ def fetch_product_calories(title, unit):
                         break
             calories_match = re.search(r'Calories: (?P<calories>\d+)kcal', food_description)
             calories = int(calories_match.group('calories'))
-            if 'г' in unit.lower():
+            if '100g' in units_to_find:
                 calories = calories / 100
 
             return {initial_title: [calories, unit]}
@@ -71,7 +74,7 @@ def fetch_product_calories(title, unit):
 
 
 if __name__ == '__main__':
-    word = 'Мягкий творог'
+    word = 'Овсяные хлопья без глютена'
     unit = '200 г'
     calories = fetch_product_calories(word, unit)
     print(calories)
