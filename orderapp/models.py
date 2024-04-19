@@ -12,10 +12,7 @@ class Product(models.Model):
         verbose_name='Название',
         max_length=25
     )
-    calories = models.PositiveIntegerField(
-        verbose_name='ккал/100г'
-    )
-    category = models.ForeignKey(
+    allergy = models.ForeignKey(
         'Allergy',
         on_delete=models.SET_NULL,
         null=True,
@@ -114,14 +111,13 @@ class Ingredient(models.Model):
         null=True
     )
     unit = models.CharField(
-        verbose_name='Единица измерения',
+        verbose_name='Единица измерения (Количество)',
         max_length=10,
     )
-    quantity = models.FloatField(
-        verbose_name='Количество'
-    )
-    grams = models.PositiveIntegerField(
-        verbose_name='Граммов в ед. измерения'
+    calories = models.FloatField(
+        verbose_name='калории',
+        blank=True,
+        null=True
     )
 
     def __str__(self):
