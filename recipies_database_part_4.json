@@ -1,0 +1,140 @@
+[
+    {
+        "title": "Низкокалорийный завтрак",
+        "image": "https://eda.ru/images/RecipePhoto/620x415/nizkokalorijnij-zavtrak_21255_photo_5734.jpg",
+        "description": "Яйцо сварить вкрутую. Сыр и помидоры порезать.\nСмешать ингредиенты.\nПосолить по вкусу.",
+        "category": "Завтраки",
+        "menu": "Низкоуглеводное",
+        "ingredients": [
+            {
+                "title": "Зеленый салат",
+                "calories": 0.017,
+                "unit": "0,1 пучков",
+                "intolerance": null
+            },
+            {
+                "title": "Куриное яйцо",
+                "calories": 70.0,
+                "unit": "1 штука",
+                "intolerance": null
+            },
+            {
+                "title": "Помидоры",
+                "units_amount": "½ штуки",
+                "calories": 0,
+                "intolerance": null
+            },
+            {
+                "title": "Черемша",
+                "calories": 1.08,
+                "unit": "г",
+                "intolerance": "Проверить!"
+            },
+            {
+                "title": "Российский сыр",
+                "calories": 177.5,
+                "unit": "50 г",
+                "intolerance": "Молочные продукты"
+            },
+            {
+                "title": "Соль",
+                "units_amount": "по вкусу",
+                "calories": 0,
+                "intolerance": null
+            }
+        ]
+    },
+    {
+        "title": "Французский завтрак",
+        "image": "https://eda.ru/images/RecipePhoto/620x415/francuzskij-zavtrak_30669_photo_13327.jpg",
+        "description": "Молоко, кардамон и мякоть банана смешать в блендере.\nКусочки хлеба или булки обмакнуть в получившуюся смесь с обеих сторон и запечь в духовке.",
+        "category": "Завтраки",
+        "menu": "Низкоуглеводное",
+        "ingredients": [
+            {
+                "title": "Белый хлеб",
+                "calories": 7.98,
+                "unit": "3 куска",
+                "intolerance": null
+            },
+            {
+                "title": "Молоко",
+                "units_amount": "½ стакана",
+                "calories": 0,
+                "intolerance": null
+            },
+            {
+                "title": "Бананы",
+                "units_amount": "½ штуки",
+                "calories": 0,
+                "intolerance": null
+            },
+            {
+                "title": "Кардамон",
+                "calories": 311.0,
+                "unit": "г",
+                "intolerance": null
+            }
+        ]
+    },
+    {
+        "title": "Фруктовый завтрак",
+        "image": "https://eda.ru/images/RecipePhoto/620x415/fruktovij-zavtrak_44131_photo_39848.jpg",
+        "description": "Поочередно измельчить в блендере киви, банан и клубнику.\nВыложить слоями в вазочку, сверху посыпать мюсли.",
+        "category": "Завтраки",
+        "menu": "Низкоуглеводное",
+        "ingredients": [
+            {
+                "title": "Клубника",
+                "calories": 32.0,
+                "unit": "100 г",
+                "intolerance": null
+            },
+            {
+                "title": "Бананы",
+                "calories": 50.0,
+                "unit": "1 штука",
+                "intolerance": "Проверить!"
+            },
+            {
+                "title": "Киви",
+                "calories": 180.0,
+                "unit": "2 штуки",
+                "intolerance": null
+            },
+            {
+                "title": "Мюсли",
+                "calories": 170.0,
+                "unit": "50 г",
+                "intolerance": null
+            }
+        ]
+    },
+    {
+        "title": "Творожный завтрак с манго и апельсином",
+        "image": "https://eda.ru/images/RecipePhoto/620x415/tvorozhnij-zavtrak-s-mango-apelsinom_27028_photo_10943.jpg",
+        "description": "Манго почистить, порезать, кинуть в блендер. Почистить апельсины, 1,5 апельсина выжать руками в блендер, оставшуюся половину кинуть просто так.\nВзбить все.\nПоложить в глубокую тарелку творог и залить получившейся смесью. Перемешивать ложкой по желанию.",
+        "category": "Завтраки",
+        "menu": "Низкоуглеводное",
+        "ingredients": [
+            {
+                "title": "Манго",
+                "calories": 110.0,
+                "unit": "1 штука",
+                "intolerance": null
+            },
+            {
+                "title": "Творог",
+                "calories": 103.0,
+                "unit": "100 г",
+                "intolerance": "Молочные продукты"
+            },
+            {
+                "title": "Апельсины",
+                "calories": 94.0,
+                "unit": "г",
+                "intolerance": null
+            }
+        ]
+    }
+]

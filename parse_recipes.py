@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import ftfy
 
+from fetch_ingredient_info import fetch_ingredient_info
 from fetch_product_calories import fetch_product_calories
 
 if __name__ == '__main__':
@@ -19,7 +20,7 @@ if __name__ == '__main__':
         urljoin(base_url, f'recepty/{diet}/{meal}') for meal in meals for diet in diets
     ]
     recipies = []
-    for link in links:
+    for link in links[8:9]:
         try:
             response = requests.get(link)
             response.raise_for_status()
@@ -60,21 +61,32 @@ if __name__ == '__main__':
 
                     ingredients_titles = [title.text for title in soup.select('span.emotion-mdupit')]
                     ingredients_units = [{'Amount': unit.text} for unit in soup.select('span.emotion-bsdd3p')]
-                    ingredients = dict(zip(ingredients_titles, ingredients_units))
+                    parsed_ingredients = dict(zip(ingredients_titles, ingredients_units))
 
-                    for k, v in ingredients.items():
+                    ingredients = []
+                    for k, v in parsed_ingredients.items():
                         match = re.search(r'\d+\.?\,?\d*', v['Amount'])
                         if not match:
                             amount = 0
+                            unit = v['Amount']
+                            ingredient_info = {
+                                'title': k,
+                                'units_amount': v['Amount'],
+                                'calories': 0,
+                                'intolerance': None
+                            }
                         else:
                             match_value = match.group(0)
                             if ',' in match_value:
                                 match_value = match_value.replace(',', '.')
                             amount = float(match_value)
-
-                        ingredient_info = fetch_product_calories(k, v['Amount'])
-                        calories_amount = ingredient_info[k][0] * amount
-                        ingredients[k]['Calories'] = calories_amount
+                            unit = v['Amount'].split(' ', 1)[1]
+                            ingredient_info = fetch_product_calories(k, v[
+                                'Amount'])
+                            ingredient_info['calories'] = ingredient_info['calories'] * amount
+                            ingredient_info_sp = fetch_ingredient_info(k, amount, unit)
+                            ingredient_info['intolerance'] = ingredient_info_sp['intolerance']
+                        ingredients.append(ingredient_info)
 
                     parsed_recipe = {
                         'title': title,
@@ -87,5 +99,5 @@ if __name__ == '__main__':
                     recipies.append(parsed_recipe)
 
     json_str = json.dumps(recipies, indent=4, ensure_ascii=False)
-    with open('recipies_database.json', 'w', encoding='utf-8') as f:
+    with open('recipies_database_part_9.json', 'w', encoding='utf-8') as f:
         f.write(json_str)

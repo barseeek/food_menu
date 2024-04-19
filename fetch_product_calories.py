@@ -11,6 +11,8 @@ env.read_env()
 
 FS_TOKEN = env.str('FS_TOKEN')
 
+translator = Translator()
+
 
 def fetch_product_calories(title, unit):
     initial_unit = unit
@@ -23,7 +25,6 @@ def fetch_product_calories(title, unit):
         last_two_words = words[-2:]
         title = ' '.join(last_two_words)
 
-    translator = Translator()
     translation = translator.translate(title, src='ru', dest='en').text
     units = {'чай': ['tsp'], 'стол': ['tbsp'], 'шт': ['serving', 'slice', translation, 'cereal'], 'стакан': ['cup',]}
     units_to_find = ['100g']
@@ -42,7 +43,7 @@ def fetch_product_calories(title, unit):
         return e
     else:
         answer = response.json()
-
+        #pprint.pprint(answer)
         if int(answer['foods']['total_results']) > 0:
             foods = answer['foods']['food']
 
@@ -68,9 +69,17 @@ def fetch_product_calories(title, unit):
             if '100g' in units_to_find:
                 calories = calories / 100
 
-            return {initial_title: [calories, unit]}
+            return {
+                'title': initial_title,
+                'calories': calories,
+                'unit': unit
+            }
         else:
-            return {initial_title: [0, '0']}
+            return {
+                'title': initial_title,
+                'calories': 0,
+                'unit': 0
+            }
 
 
 if __name__ == '__main__':
