@@ -12,10 +12,7 @@ class Product(models.Model):
         verbose_name='Название',
         max_length=25
     )
-    calories = models.PositiveIntegerField(
-        verbose_name='ккал/100г'
-    )
-    category = models.ForeignKey(
+    allergy = models.ForeignKey(
         'Allergy',
         on_delete=models.SET_NULL,
         null=True,
@@ -38,7 +35,7 @@ class Menu(models.Model):
         return self.title
 
 
-class Category(models.Model):
+class Meal(models.Model):
     title = models.CharField(
         verbose_name='Категория (Время дня)',
         max_length=25
@@ -66,34 +63,25 @@ class Recipe(models.Model):
     description = models.TextField(
         verbose_name='Описание'
     )
-    categories = models.ManyToManyField(
-        Category,
+    meal = models.ForeignKey(
+        Meal,
         verbose_name='Категория (Время дня)',
-        related_name='categories'
+        related_name='recipies',
+        on_delete=models.CASCADE,
+        null=True
     )
     calories = models.PositiveIntegerField(
         verbose_name='Общая калорийность',
         blank=True,
         default=0
     )
-    menus = models.ManyToManyField(
+    menu = models.ForeignKey(
         Menu,
         verbose_name='Типы меню',
-        related_name='recipies'
+        related_name='recipies',
+        on_delete=models.CASCADE,
+        null=True
     )
-
-    def save(self, *args, **kwargs):
-        ingredients = self.ingredients.all()
-        calories = [
-            (
-                    ingredient.product.calories *
-                    ingredient.quantity *
-                    ingredient.grams /
-                    100
-            ) for ingredient in ingredients
-        ]
-        self.calories = sum(calories)
-        super(Recipe, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -114,14 +102,13 @@ class Ingredient(models.Model):
         null=True
     )
     unit = models.CharField(
-        verbose_name='Единица измерения',
+        verbose_name='Единица измерения (Количество)',
         max_length=10,
     )
-    quantity = models.FloatField(
-        verbose_name='Количество'
-    )
-    grams = models.PositiveIntegerField(
-        verbose_name='Граммов в ед. измерения'
+    calories = models.FloatField(
+        verbose_name='калории',
+        blank=True,
+        null=True
     )
 
     def __str__(self):
