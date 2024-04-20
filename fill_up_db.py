@@ -21,13 +21,13 @@ rus_allergies = [
 
 
 def process_recipe(recipe_info):
-    meal, created = Meal.objects.get_or_create(
+    meal, created = Meal.objects.update_or_create(
         title=recipe_info['category']
     )
-    menu, created = Menu.objects.get_or_create(
+    menu, created = Menu.objects.update_or_create(
         title=recipe_info['menu']
     )
-    recipe, created = Recipe.objects.get_or_create(
+    recipe, created = Recipe.objects.update_or_create(
         title=recipe_info['title'],
         description=recipe_info['description'],
         meal=meal,
@@ -39,24 +39,24 @@ def process_recipe(recipe_info):
             ingredient['unit'] = ingredient['units_amount']
             del ingredient['units_amount']
 
-        product, created = Product.objects.get_or_create(
+        product, created = Product.objects.update_or_create(
             title=ingredient['title']
         )
         if ingredient['intolerance'] in rus_allergies:
-            allergy, created = Allergy.objects.get_or_create(
+            allergy, created = Allergy.objects.update_or_create(
                 title=ingredient['intolerance']
             )
             product.allergy = allergy
         else:
-            allergy, created = Allergy.objects.get_or_create(
+            allergy, created = Allergy.objects.update_or_create(
                 title='Нет'
             )
             product.allergy = allergy
         product.save()
         print(ingredient)
-        Ingredient.objects.get_or_create(
+        Ingredient.objects.update_or_create(
             unit=ingredient['unit'],
-            calories=ingredient['calories'],
+            calories=round(ingredient['calories'], 1),
             product=product,
             recipe=recipe
         )
