@@ -84,7 +84,7 @@ class Recipe(models.Model):
     )
     image = models.ImageField(
         verbose_name='Картинка',
-        null=True
+        null=True,
     )
 
     def __str__(self):

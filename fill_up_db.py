@@ -1,7 +1,9 @@
 import json
 import os
-
+import requests
 import django
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'food_menu.settings')
 django.setup()
@@ -31,6 +33,7 @@ def process_recipe(recipe_info):
         meal=meal,
         menu=menu
     )
+
     for ingredient in recipe_info['ingredients']:
         if 'units_amount' in ingredient:
             ingredient['unit'] = ingredient['units_amount']
@@ -61,7 +64,21 @@ def process_recipe(recipe_info):
     ingredients = recipe.ingredients.all()
     calories = sum(ingredient.calories for ingredient in ingredients)
     recipe.calories = calories
-    recipe.save()
+
+    os.makedirs('media', exist_ok=True)
+    try:
+        response = requests.get(recipe_info['image'])
+        response.raise_for_status()
+    except Exception as err:
+        print(err)
+    else:
+        img_temp = NamedTemporaryFile(delete=True)
+        img_temp.write(response.content)
+        img_temp.flush()
+        recipe.image.save(os.path.basename(recipe_info['image']),
+                          File(img_temp))
+    finally:
+        recipe.save()
 
 
 if __name__ == '__main__':
