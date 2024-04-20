@@ -51,3 +51,13 @@ def register_user(request):
         request=request,
         template_name='account/registration.html',
     )
+
+
+def account(request):
+    return render(
+        request=request,
+        context={
+            "user": request.user,
+        },
+        template_name='account/lk.html'
+    )
