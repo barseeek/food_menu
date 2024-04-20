@@ -72,7 +72,7 @@
             {
                 "title": "Апельсины",
                 "calories": 47.0,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -168,8 +168,8 @@
             {
                 "title": "Черемша",
                 "calories": 1.08,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "3 стебля",
+                "intolerance": null
             },
             {
                 "title": "Российский сыр",
@@ -271,7 +271,7 @@
                 "title": "Консервированные помидоры кусочками",
                 "calories": 0.22,
                 "unit": "1 кг",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Сыр моцарелла",
@@ -327,7 +327,7 @@
             {
                 "title": "Пшеничная мука",
                 "calories": 100.0,
-                "unit": "г",
+                "unit": "1 столовая ложка",
                 "intolerance": "Зерновые"
             },
             {
@@ -428,9 +428,9 @@
         "ingredients": [
             {
                 "title": "Сибас",
-                "calories": 0.0,
-                "unit": 0,
-                "intolerance": "Проверить!"
+                "calories": 970,
+                "unit": "2 штуки",
+                "intolerance": "Рыба и морепродукты"
             },
             {
                 "title": "Свежие листья шпината",
@@ -459,7 +459,7 @@
             {
                 "title": "Свежий тимьян",
                 "calories": 1.0,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -534,14 +534,14 @@
             {
                 "title": "Яичный желток",
                 "calories": 322.0,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
                 "title": "Сливки 33%-ные",
                 "calories": 135.0,
                 "unit": "3 столовые ложки",
-                "intolerance": "Проверить!"
+                "intolerance": "Молочные продукты"
             },
             {
                 "title": "Сливочное масло",
@@ -564,7 +564,7 @@
             {
                 "title": "Томатный соус",
                 "calories": 55.5,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -639,13 +639,13 @@
             {
                 "title": "Лисички",
                 "calories": 1075.0,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "250 г",
+                "intolerance": null
             },
             {
                 "title": "Творожный сыр",
                 "calories": 330.0,
-                "unit": "г",
+                "unit": "3 столовые ложки",
                 "intolerance": "Молочные продукты"
             },
             {
@@ -657,7 +657,7 @@
             {
                 "title": "Морская соль",
                 "calories": 0.0,
-                "unit": "г",
+                "unit": "по вкусу",
                 "intolerance": null
             },
             {
@@ -746,9 +746,9 @@
         "ingredients": [
             {
                 "title": "Кета",
-                "calories": 80.0,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "calories": 120.0,
+                "unit": "100 г",
+                "intolerance": "Рыба и морепродукты"
             },
             {
                 "title": "Авокадо",
@@ -791,9 +791,9 @@
         "ingredients": [
             {
                 "title": "Кефир 3,2%-ный",
-                "calories": 2205.0,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "calories": 598,
+                "unit": "1050 мл",
+                "intolerance": "Молочные продукты"
             },
             {
                 "title": "Кукурузный крахмал",
@@ -810,18 +810,18 @@
             {
                 "title": "Сода",
                 "calories": 76.0,
-                "unit": "г",
+                "unit": "2 чайные ложки",
                 "intolerance": null
             },
             {
                 "title": "Соль",
                 "calories": 0.0,
                 "unit": "2 чайные ложки",
-                "intolerance": "Рыба и морепродукты"
+                "intolerance": null
             },
             {
                 "title": "Сливочное масло",
-                "calories": 21.509999999999998,
+                "calories": 600,
                 "unit": "3 куска",
                 "intolerance": null
             },
@@ -829,7 +829,7 @@
                 "title": "Эритрит",
                 "calories": 0.0,
                 "unit": 0,
-                "intolerance": "Проверить!"
+                "intolerance": null
             }
         ]
     },
@@ -861,14 +861,14 @@
             {
                 "title": "Эритрит",
                 "calories": 0.0,
-                "unit": 0,
-                "intolerance": "Проверить!"
+                "unit": "1,5 столовых ложек",
+                "intolerance": null
             },
             {
                 "title": "Ванилин",
                 "calories": 2.4,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "1 г",
+                "intolerance": null
             },
             {
                 "title": "Сливочное масло",
@@ -923,8 +923,8 @@
             },
             {
                 "title": "Сушеный базилик",
-                "calories": 75.3,
-                "unit": "г",
+                "calories": 5,
+                "unit": "0,3 чайных ложек",
                 "intolerance": null
             },
             {
@@ -943,12 +943,12 @@
                 "title": "Эритрит",
                 "calories": 0.0,
                 "unit": 0,
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Молотый мускатный орех",
-                "calories": 157.5,
-                "unit": "г",
+                "calories": 5,
+                "unit": "0,3 чайных ложек",
                 "intolerance": "Орехи и бобовые "
             }
         ]
@@ -981,8 +981,8 @@
             {
                 "title": "Цукини",
                 "calories": 230.0,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "1 штука",
+                "intolerance": null
             },
             {
                 "title": "Красный сладкий перец",
@@ -1067,8 +1067,8 @@
             },
             {
                 "title": "Сахар",
-                "calories": 774.0,
-                "unit": "г",
+                "calories": 100.0,
+                "unit": "2 столовые ложки",
                 "intolerance": null
             },
             {
@@ -1137,7 +1137,7 @@
             {
                 "title": "Сливки 20%-ные",
                 "calories": 560.0,
-                "unit": "г",
+                "unit": "200 мл",
                 "intolerance": null
             },
             {
@@ -1166,13 +1166,13 @@
             },
             {
                 "title": "Молодые кабачки",
-                "calories": 1072.0,
-                "unit": "г",
+                "calories": 50,
+                "unit": "4 штуки",
                 "intolerance": null
             },
             {
                 "title": "Куриный бульон",
-                "calories": 0.16,
+                "calories": 50,
                 "unit": "1 л",
                 "intolerance": null
             },
@@ -1253,14 +1253,14 @@
             },
             {
                 "title": "Французский багет",
-                "calories": 16.44,
+                "calories": 250,
                 "unit": "6 кусков",
                 "intolerance": null
             },
             {
                 "title": "Молодая морковь",
                 "calories": 82.0,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -1305,8 +1305,8 @@
             {
                 "title": "Черемша",
                 "calories": 1.08,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "3 стебля",
+                "intolerance": null
             },
             {
                 "title": "Российский сыр",
@@ -1331,7 +1331,7 @@
         "ingredients": [
             {
                 "title": "Белый хлеб",
-                "calories": 7.98,
+                "calories": 200,
                 "unit": "3 куска",
                 "intolerance": null
             },
@@ -1349,8 +1349,8 @@
             },
             {
                 "title": "Кардамон",
-                "calories": 311.0,
-                "unit": "г",
+                "calories": 10,
+                "unit": "1 штука",
                 "intolerance": null
             }
         ]
@@ -1370,9 +1370,9 @@
             },
             {
                 "title": "Бананы",
-                "calories": 50.0,
+                "calories": 100.0,
                 "unit": "1 штука",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Киви",
@@ -1410,7 +1410,7 @@
             {
                 "title": "Апельсины",
                 "calories": 94.0,
-                "unit": "г",
+                "unit": "2 штуки",
                 "intolerance": null
             }
         ]
@@ -1473,8 +1473,8 @@
             {
                 "title": "Ванилин",
                 "calories": 16.8,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "7 г",
+                "intolerance": null
             },
             {
                 "title": "Соль",
@@ -1531,7 +1531,7 @@
                 "title": "Сметана 10%-ная",
                 "calories": 642.0,
                 "unit": "300 г",
-                "intolerance": "Проверить!"
+                "intolerance": "Молочные продукты"
             },
             {
                 "title": "Желатин",
@@ -1574,8 +1574,8 @@
             },
             {
                 "title": "Ванильный сахар",
-                "calories": 1221.0,
-                "unit": "г",
+                "calories": 122.0,
+                "unit": "1,5 столовых ложек",
                 "intolerance": null
             },
             {
@@ -1593,13 +1593,13 @@
             {
                 "title": "Овсяные хлопья быстрого приготовления",
                 "calories": 409.5,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "3,5 стакана",
+                "intolerance": "Зерновые"
             },
             {
                 "title": "Крепкий кофе",
-                "calories": 540.0,
-                "unit": "г",
+                "calories": 10,
+                "unit": "3 столовые ложки",
                 "intolerance": null
             }
         ]
@@ -1632,7 +1632,7 @@
             {
                 "title": "Клубничный йогурт",
                 "calories": 400.0,
-                "unit": "г",
+                "unit": "500 г",
                 "intolerance": "Молочные продукты"
             },
             {
@@ -1740,25 +1740,25 @@
             {
                 "title": "Кокосовое масло",
                 "calories": 180.0,
-                "unit": "г",
+                "unit": "1,5 стаканов",
                 "intolerance": "Орехи и бобовые "
             },
             {
                 "title": "Вода",
                 "calories": 0.0,
-                "unit": "г",
+                "unit": "3 чайные ложки",
                 "intolerance": null
             },
             {
                 "title": "Брусника",
-                "calories": 750.0,
-                "unit": "г",
+                "calories": 230.0,
+                "unit": "500 г",
                 "intolerance": null
             },
             {
                 "title": "Семена чиа",
                 "calories": 90.0,
-                "unit": "г",
+                "unit": "1,5 чайных ложек",
                 "intolerance": null
             },
             {
@@ -1776,7 +1776,7 @@
             {
                 "title": "Лимонный сок",
                 "calories": 12.5,
-                "unit": "г",
+                "unit": "0.5 стакана",
                 "intolerance": null
             },
             {
@@ -1787,7 +1787,7 @@
             },
             {
                 "title": "Лимонная цедра",
-                "calories": 180.0,
+                "calories": 0,
                 "unit": "1 штука",
                 "intolerance": null
             },
@@ -1833,7 +1833,7 @@
             {
                 "title": "Сок лайма",
                 "calories": 8.0,
-                "unit": "г",
+                "unit": "4 столовые ложки",
                 "intolerance": null
             },
             {
@@ -1844,9 +1844,9 @@
             },
             {
                 "title": "Цедра лайма",
-                "calories": 177.0,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "calories": 0,
+                "unit": "1 штука",
+                "intolerance": null
             },
             {
                 "title": "Ванильный экстракт",
@@ -1857,7 +1857,7 @@
             {
                 "title": "Матча",
                 "calories": 19.2,
-                "unit": "г",
+                "unit": "8 г",
                 "intolerance": null
             },
             {
@@ -1869,7 +1869,7 @@
             {
                 "title": "Греческий йогурт",
                 "calories": 195.0,
-                "unit": "г",
+                "unit": "150 г",
                 "intolerance": null
             },
             {
@@ -1887,13 +1887,13 @@
             {
                 "title": "Ванильный стручок",
                 "calories": 101.0,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
                 "title": "Яичный желток",
-                "calories": 1932.0,
-                "unit": "г",
+                "calories": 400,
+                "unit": "6 штук",
                 "intolerance": null
             },
             {
@@ -1912,7 +1912,7 @@
                 "title": "Соль",
                 "calories": 0.0,
                 "unit": "0.5 г",
-                "intolerance": "Рыба и морепродукты"
+                "intolerance": null
             }
         ]
     },
@@ -1949,8 +1949,8 @@
             },
             {
                 "title": "Какао",
-                "calories": 229.0,
-                "unit": "г",
+                "calories": 35,
+                "unit": "1 чайная ложка",
                 "intolerance": null
             },
             {
@@ -2100,7 +2100,7 @@
             {
                 "title": "Свежий тимьян",
                 "calories": 1.0,
-                "unit": "г",
+                "unit": "2 г",
                 "intolerance": null
             },
             {
@@ -2113,7 +2113,7 @@
                 "title": "Опилки ольховые",
                 "calories": 0.0,
                 "unit": 0,
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Оливковое масло",
@@ -2137,7 +2137,7 @@
                 "title": "Белая часть лука-порей",
                 "calories": 129.0,
                 "unit": "50 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Вешенки",
@@ -2188,7 +2188,7 @@
                 "title": "Шампиньоны",
                 "calories": 130.0,
                 "unit": "500 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Репчатый лук",
@@ -2205,7 +2205,7 @@
             {
                 "title": "Сливки 20%-ные",
                 "calories": 1400.0,
-                "unit": "г",
+                "unit": "500 мл",
                 "intolerance": null
             },
             {
@@ -2251,7 +2251,7 @@
                 "title": "Сливки 10%-ные",
                 "calories": 447.0,
                 "unit": "150 мл",
-                "intolerance": "Проверить!"
+                "intolerance": "Молочные продукты"
             },
             {
                 "title": "Ржаные сухарики",
@@ -2378,8 +2378,8 @@
         "ingredients": [
             {
                 "title": "Филе трески",
-                "calories": 0.96,
-                "unit": "г",
+                "calories": 984,
+                "unit": "1,2 кг",
                 "intolerance": "Рыба и морепродукты"
             },
             {
@@ -2391,7 +2391,7 @@
             {
                 "title": "Лимон",
                 "calories": 58.0,
-                "unit": "г",
+                "unit": "2 штуки",
                 "intolerance": null
             },
             {
@@ -2429,7 +2429,7 @@
         "ingredients": [
             {
                 "title": "Хек",
-                "calories": 4.4,
+                "calories": 435,
                 "unit": "4 куска",
                 "intolerance": "Рыба и морепродукты"
             },
@@ -2441,14 +2441,14 @@
             },
             {
                 "title": "Рубленая петрушка",
-                "calories": 108.0,
-                "unit": "г",
+                "calories": 22,
+                "unit": "3 столовые ложки",
                 "intolerance": null
             },
             {
                 "title": "Свежий лавровый лист",
-                "calories": 313.0,
-                "unit": "г",
+                "calories": 0,
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -2516,8 +2516,8 @@
             },
             {
                 "title": "Черный перец горошком",
-                "calories": 360.0,
-                "unit": "г",
+                "calories": 0,
+                "unit": "4 штуки",
                 "intolerance": null
             },
             {
@@ -2529,7 +2529,7 @@
             {
                 "title": "Лимон",
                 "calories": 58.0,
-                "unit": "г",
+                "unit": "2 штуки",
                 "intolerance": null
             },
             {
@@ -2634,7 +2634,7 @@
             {
                 "title": "Лимон",
                 "calories": 14.5,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -2652,14 +2652,14 @@
             {
                 "title": "Кинза",
                 "calories": 4.4,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "4 стебля",
+                "intolerance": null
             },
             {
                 "title": "Гвоздика",
                 "calories": 360.0,
                 "unit": "4 штуки",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Соль",
@@ -2733,7 +2733,7 @@
             {
                 "title": "Молодая морковь",
                 "calories": 82.0,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -2761,7 +2761,7 @@
                 "title": "Шампиньоны",
                 "calories": 78.0,
                 "unit": "300 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Репчатый лук",
@@ -2790,7 +2790,7 @@
             {
                 "title": "Пшеничная мука",
                 "calories": 100.0,
-                "unit": "г",
+                "unit": "1 столовая ложка",
                 "intolerance": "Зерновые"
             },
             {
@@ -2848,7 +2848,7 @@
                 "title": "Шампиньоны",
                 "calories": 78.0,
                 "unit": "300 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Картофель",
@@ -2889,7 +2889,7 @@
             {
                 "title": "Сливки 20%-ные",
                 "calories": 280.0,
-                "unit": "г",
+                "unit": "200 мл",
                 "intolerance": null
             }
         ]
@@ -2978,8 +2978,8 @@
             },
             {
                 "title": "Кунжут",
-                "calories": 283.5,
-                "unit": "г",
+                "calories": 28,
+                "unit": "0.5 чайные ложки",
                 "intolerance": "Орехи и бобовые "
             },
             {
@@ -2991,7 +2991,7 @@
             {
                 "title": "Морская соль",
                 "calories": 0.0,
-                "unit": "г",
+                "unit": "0.5 чайные ложки",
                 "intolerance": null
             }
         ]
@@ -3019,7 +3019,7 @@
                 "title": "Псиллиум",
                 "calories": 20.0,
                 "unit": "10 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Куриное яйцо",
@@ -3090,7 +3090,7 @@
             {
                 "title": "Альбумин",
                 "calories": 12.5,
-                "unit": "г",
+                "unit": "50 г",
                 "intolerance": null
             },
             {
@@ -3123,7 +3123,7 @@
             {
                 "title": "Анис (бадьян)",
                 "calories": 1011.0,
-                "unit": "г",
+                "unit": "3 штуки",
                 "intolerance": null
             },
             {
@@ -3460,7 +3460,7 @@
                 "title": "Бананы",
                 "calories": 108.0,
                 "unit": "1 штука",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Куриное яйцо",
@@ -3495,8 +3495,8 @@
             {
                 "title": "Ряженка ",
                 "calories": 119.0,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "70 мл",
+                "intolerance": "Молочные продукты"
             }
         ]
     },
@@ -3511,7 +3511,7 @@
                 "title": "Фруктоза",
                 "calories": 220.8,
                 "unit": "60 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Яичный белок",
@@ -3549,13 +3549,13 @@
             {
                 "title": "Овсяные отруби",
                 "calories": 360.0,
-                "unit": "г",
-                "intolerance": null
+                "unit": "3 столовые ложки",
+                "intolerance": "Зерновые"
             },
             {
                 "title": "Какао",
                 "calories": 458.0,
-                "unit": "г",
+                "unit": "2 чайные ложки",
                 "intolerance": null
             },
             {
@@ -3580,13 +3580,13 @@
                 "title": "Обезжиренный творог",
                 "calories": 94.0,
                 "unit": "100 г",
-                "intolerance": "Проверить!"
+                "intolerance": "Молочные продукты"
             },
             {
                 "title": "Обезжиренное сухое молоко",
-                "calories": 562.0,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "calories": 200,
+                "unit": "1 столовая ложка",
+                "intolerance": "Молочные продукты"
             },
             {
                 "title": "Черника",
@@ -3612,7 +3612,7 @@
             {
                 "title": "Греческий йогурт",
                 "calories": 728.0,
-                "unit": "г",
+                "unit": "560 мл",
                 "intolerance": null
             },
             {
@@ -3624,7 +3624,7 @@
             {
                 "title": "Клеверный мед",
                 "calories": 91.2,
-                "unit": "г",
+                "unit": "0,3 стаканов",
                 "intolerance": "Продукты пчеловодства"
             },
             {
@@ -3669,7 +3669,7 @@
             {
                 "title": "Апельсины",
                 "calories": 47.0,
-                "unit": "г",
+                "unit": "1 штука",
                 "intolerance": null
             },
             {
@@ -3726,7 +3726,7 @@
             {
                 "title": "Консервированная кукуруза",
                 "calories": 120.0,
-                "unit": "г",
+                "unit": "2 столовые ложки",
                 "intolerance": "Зерновые"
             },
             {
@@ -3738,8 +3738,8 @@
             {
                 "title": "Кинза",
                 "calories": 1.1,
-                "unit": "г",
-                "intolerance": "Проверить!"
+                "unit": "1 пучок",
+                "intolerance": null
             },
             {
                 "title": "Петрушка",
@@ -3760,7 +3760,7 @@
                 "title": "Овсяные хлопья без глютена",
                 "calories": 752.0,
                 "unit": "200 г",
-                "intolerance": "Проверить!"
+                "intolerance": "Зерновые"
             },
             {
                 "title": "Семена чиа",
@@ -3771,20 +3771,20 @@
             {
                 "title": "Миндальное молоко",
                 "calories": 60.0,
-                "unit": "г",
+                "unit": "200 мл",
                 "intolerance": "Орехи и бобовые "
             },
             {
                 "title": "Свежемороженая брусника",
                 "calories": 19.5,
                 "unit": "50 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Измельченные орехи пекан",
                 "calories": 328.0,
                 "unit": "50 г",
-                "intolerance": "Проверить!"
+                "intolerance": null
             },
             {
                 "title": "Мед",
@@ -3805,7 +3805,7 @@
                 "title": "Овсяные хлопья",
                 "calories": 77.0,
                 "unit": "0,7 стаканов",
-                "intolerance": "Проверить!"
+                "intolerance": "Зерновые"
             },
             {
                 "title": "Натуральный йогурт",
