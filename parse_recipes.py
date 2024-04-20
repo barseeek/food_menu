@@ -20,7 +20,9 @@ if __name__ == '__main__':
         urljoin(base_url, f'recepty/{diet}/{meal}') for meal in meals for diet in diets
     ]
     recipies = []
-    for link in links[8:9]:
+    for link in links[14:15]:
+        print('LINKS: ', links)
+        print('CURRENT LINK: ', link)
         try:
             response = requests.get(link)
             response.raise_for_status()
@@ -65,6 +67,8 @@ if __name__ == '__main__':
 
                     ingredients = []
                     for k, v in parsed_ingredients.items():
+                        if '½' in v['Amount']:
+                            v['Amount'] = v['Amount'].replace('½', '0.5')
                         match = re.search(r'\d+\.?\,?\d*', v['Amount'])
                         if not match:
                             amount = 0
@@ -99,5 +103,5 @@ if __name__ == '__main__':
                     recipies.append(parsed_recipe)
 
     json_str = json.dumps(recipies, indent=4, ensure_ascii=False)
-    with open('recipies_database_part_9.json', 'w', encoding='utf-8') as f:
+    with open('recipies_database_part_15.json', 'w', encoding='utf-8') as f:
         f.write(json_str)
