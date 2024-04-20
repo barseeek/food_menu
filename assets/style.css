@@ -29,6 +29,13 @@ body {
     border: none;
 }
 
+.recipe-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .foodplan__shadow {
     border: none;
     box-shadow: 0 0 18px rgb(0 0 0 / 10%);

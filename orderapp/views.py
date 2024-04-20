@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
+from orderapp.models import Recipe
 from orderapp.payment import create_yoo_payment
 
 
@@ -38,6 +40,26 @@ def new_order(request):
         request,
         context=context,
         template_name="orderapp/order.html"
+    )
+
+
+def get_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    serialized_recipe = {
+        "title": recipe.title,
+        "ingredients": [
+            {
+                ingredient.product.title: ingredient.unit
+            } for ingredient in recipe.ingredients.all()
+        ],
+        "description": recipe.description,
+        "calories": recipe.calories,
+        "image": recipe.image.url if recipe.image else staticfiles_storage.url("img/circle1.png")
+    }
+    return render(
+        request,
+        'orderapp/recipe.html',
+        {'recipe': serialized_recipe}
     )
 
 
