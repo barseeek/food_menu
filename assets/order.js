@@ -18,7 +18,7 @@ Vue.createApp({
             selected_date: 0,
             quantity: 1,
             menu_prices: order_data.menu.map(item => (item.price)),
-            allergies_prices: order_data.menu.map(item => (item.price)),
+            allergies_prices: order_data.allergies.map(item => (item.price)),
         }
     },
     methods: {
