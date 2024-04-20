@@ -32,7 +32,7 @@
             },
             {
                 "title": "Лимон",
-                "units_amount": "½ штуки",
+                "units_amount": "0.5 штуки",
                 "calories": 0,
                 "intolerance": null
             },
@@ -161,8 +161,8 @@
             },
             {
                 "title": "Помидоры",
-                "units_amount": "½ штуки",
-                "calories": 0,
+                "units_amount": "0.5 штуки",
+                "calories": 9,
                 "intolerance": null
             },
             {
@@ -935,7 +935,7 @@
             },
             {
                 "title": "Соль",
-                "units_amount": "½ чайные ложки",
+                "units_amount": "0.5 чайные ложки",
                 "calories": 0,
                 "intolerance": null
             },
@@ -1298,8 +1298,8 @@
             },
             {
                 "title": "Помидоры",
-                "units_amount": "½ штуки",
-                "calories": 0,
+                "units_amount": "0.5 штуки",
+                "calories": 9,
                 "intolerance": null
             },
             {
@@ -1337,14 +1337,14 @@
             },
             {
                 "title": "Молоко",
-                "units_amount": "½ стакана",
-                "calories": 0,
+                "units_amount": "0.5 стакана",
+                "calories": 80.0,
                 "intolerance": null
             },
             {
                 "title": "Бананы",
-                "units_amount": "½ штуки",
-                "calories": 0,
+                "units_amount": "0.5 штуки",
+                "calories": 50.0,
                 "intolerance": null
             },
             {
@@ -1970,8 +1970,8 @@
         "ingredients": [
             {
                 "title": "Говяжья грудинка",
-                "units_amount": "½ кг",
-                "calories": 0,
+                "units_amount": "0.5 кг",
+                "calories": 1710,
                 "intolerance": null
             },
             {
@@ -1994,8 +1994,8 @@
             },
             {
                 "title": "Консервированная фасоль",
-                "units_amount": "½ кг",
-                "calories": 0,
+                "units_amount": "0.5 кг",
+                "calories": 410,
                 "intolerance": null
             },
             {
