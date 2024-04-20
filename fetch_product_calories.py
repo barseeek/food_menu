@@ -24,6 +24,8 @@ def fetch_product_calories(title, unit):
     if len(words) >= 2:
         last_two_words = words[-2:]
         title = ' '.join(last_two_words)
+    if title.endswith('ы') and len(title.split()) == 1:
+        title = title[:-1]
 
     translation = translator.translate(title, src='ru', dest='en').text
     units = {'чай': ['tsp'], 'стол': ['tbsp'], 'шт': ['serving', 'slice', translation, 'cereal'], 'стакан': ['cup',]}
@@ -83,8 +85,8 @@ def fetch_product_calories(title, unit):
 
 
 if __name__ == '__main__':
-    word = 'Овсяные хлопья без глютена'
-    unit = '200 г'
+    word = 'Апельсин'
+    unit = '1 штука'
     calories = fetch_product_calories(word, unit)
     print(calories)
 

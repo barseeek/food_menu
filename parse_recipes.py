@@ -71,7 +71,7 @@ if __name__ == '__main__':
                             unit = v['Amount']
                             ingredient_info = {
                                 'title': k,
-                                'units_amount': v['Amount'],
+                                'unit': v['Amount'],
                                 'calories': 0,
                                 'intolerance': None
                             }
