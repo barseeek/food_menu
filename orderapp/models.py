@@ -82,6 +82,10 @@ class Recipe(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+    image = models.ImageField(
+        verbose_name='Картинка',
+        null=True
+    )
 
     def __str__(self):
         return self.title
