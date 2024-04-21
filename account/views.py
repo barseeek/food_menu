@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.contrib.auth import login
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from orderapp.models import CustomUser
 
@@ -21,12 +23,17 @@ def user_login(request):
                 request=request,
                 user=user,
             )
-            return HttpResponse('Authenticate successfully')
+            return HttpResponseRedirect(reverse('index'))
     return render(
         request=request,
         template_name='account/login.html',
     )
 
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('index'))
 
 def register_user(request):
     if request.method == 'POST':
@@ -46,7 +53,7 @@ def register_user(request):
         )
         user.set_password(password)
         user.save(update_fields=['password'])
-        return HttpResponse('Created successfully')
+        return HttpResponseRedirect(reverse('index'))
     return render(
         request=request,
         template_name='account/registration.html',

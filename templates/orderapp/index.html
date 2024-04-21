@@ -17,9 +17,16 @@
                 <a class="navbar-brand" href="#">
                     <img src="{% static 'img/logo.8d8f24edbb5f.svg' %}" height="55" width="189" alt="">
                 </a>
-                <a href="account/login">
-                    <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</button>
-                </a>
+                {% if not user.is_authenticated %}
+                    <a href="account/login">
+                        <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</button>
+                    </a>
+                {% else %}
+                    <a href="account/">
+                        <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Личный кабинет</button>
+                    </a>
+                {% endif %}
+
             </div>
         </nav>
     </header>
@@ -33,10 +40,24 @@
                             Вы получаете рецепты + список продуктов.<br>
                             Больше не нужно думать, что готовить.</h4>
                         <div class="d-block mt-3">
+                            {% if random_recipe_id %}
+                            <a href="{% url 'get_recipe' random_recipe_id %}">
                             <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">
                                 Хочу попробовать
                             </button>
+                            </a>
+                            {% else %}
+                            <a href="{% url 'index' %}">
+                            <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">
+                                Хочу попробовать
+                            </button>
+                            </a>
+                            {% endif %}
+                            {% if user.is_authenticated %}
                             <a href="orderapp">
+                            {% else %}
+                            <a href="{% url 'login' %}">
+                            {% endif %}
                                 <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">
                                     Оформить подписку
                                 </button>
