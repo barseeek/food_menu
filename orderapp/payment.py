@@ -10,7 +10,9 @@ Configuration.account_id = settings.YOO_SHOP_ID
 Configuration.secret_key = settings.YOO_API_TOKEN
 
 
-def create_yoo_payment(payment_amount, payment_currency, sub_period, metadata: dict = {}) -> dict:
+def create_yoo_payment(payment_amount, payment_currency, sub_period, metadata=None) -> dict:
+    if metadata is None:
+        metadata = {}
     idempotence_key = str(uuid.uuid4())
     payment = Payment.create({
         "save_payment_method": True,

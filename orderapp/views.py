@@ -1,19 +1,25 @@
+import datetime
 import random
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from orderapp.models import Recipe, Menu, Subscription
+from orderapp.models import Recipe, Menu, Subscription, Allergy
 from orderapp.payment import create_yoo_payment
 
 
 def index(request):
     count = Recipe.objects.count()
     random_recipe_id = random.randint(1, count) if count > 0 else None
+    sub_counter = 0
+    if request.user.is_authenticated:
+        sub_counter = Subscription.objects.filter(user=request.user, end__gt=datetime.datetime.now().date()).count()
     context = {
         'random_recipe_id': random_recipe_id,
+        'sub_counter': sub_counter
     }
     return render(request, 'orderapp/index.html', context=context)
 
@@ -86,11 +92,18 @@ def make_payment(request):
         'keto': 'Кето',
         'veg': 'Вегетарианское'
     }
+    allergy_labels = [
+        "Рыба и морепродукты", "Зерновые", "Продукты пчеловодства", "Орехи и бобовые", "Молочные продукты"
+    ]
+
     sub_period = duration_mapping[params.get('period', 0)]
     payment_amount = int(params["cost"])
-    payment = create_yoo_payment(payment_amount, 'RUB', sub_period, params)
+    try:
+        payment = create_yoo_payment(payment_amount, 'RUB', sub_period, params)
+    except Exception as e:
+        return HttpResponse(f'Возникла ошибка при оплате {e}'.format(e=e))
     menu, created = Menu.objects.get_or_create(title=menu_mapping[params.get('foodtype', 'classic')])
-    Subscription.objects.create(
+    new_subscription = Subscription.objects.create(
         months=str(sub_period),
         persons=params.get('select_quantity', '1'),
         cost=payment_amount,
@@ -101,4 +114,16 @@ def make_payment(request):
         dessert=params.get('select3', "0") == "1",
         user=request.user
     )
+
+    selected_allergies = []
+    for i in range(5):
+        if params.get(f'allergy{i}', '') == 'on':
+            selected_allergies.append(allergy_labels[i])
+    if not selected_allergies:
+        allergies = Allergy.objects.filter(title='Нет')
+    else:
+        allergies = Allergy.objects.filter(title__in=selected_allergies)
+    new_subscription.allergies.add(*allergies)
+
+    new_subscription.save()
     return redirect(payment["confirmation"]["confirmation_url"])
