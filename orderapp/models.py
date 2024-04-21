@@ -177,7 +177,7 @@ class Subscription(models.Model):
         super(Subscription, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.menu} - {self.pk}'
+        return f'Подписка {self.menu} для {self.user.username} {self.user.first_name} {self.user.last_name}'
 
 
 class CustomUser(AbstractUser):

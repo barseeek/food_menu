@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-from orderapp.models import CustomUser
+from orderapp.models import CustomUser, Subscription, Recipe, Product
 
 
 def user_login(request):
@@ -35,6 +36,7 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('index'))
 
+
 def register_user(request):
     if request.method == 'POST':
         name = request.POST.get('exampleInputName')
@@ -61,10 +63,44 @@ def register_user(request):
 
 
 def account(request):
+    try:
+        subscription = Subscription.objects.get(user=request.user)
+    except (Subscription.DoesNotExist, Subscription.MultipleObjectsReturned):
+        subscription = None
+        return render(
+            request=request,
+            template_name='orderapp/index.html'
+        )
+    count_meals = (int(subscription.breakfast) + int(subscription.lunch) +
+                   int(subscription.dinner) + int(subscription.dessert))
+
+
+    # Получаем список аллергий пользователя
+    user_allergies = subscription.allergies.all()
+
+    # Создаём список ID продуктов, которые вызывают аллергии
+    allergenic_product_ids = Product.objects.filter(allergy__in=user_allergies).values_list('id', flat=True)
+
+    # Фильтруем рецепты, исключая те, что содержат аллергенные продукты
+    recipes = Recipe.objects.filter(menu=subscription.menu).exclude(ingredients__product__id__in=allergenic_product_ids).distinct()
+    meal_data = {}
+    if subscription:
+        if subscription.breakfast:
+            meal_data['Завтраки'] = recipes.filter(meal__title='Завтраки')
+        if subscription.lunch:
+            meal_data['Обеды'] = recipes.filter(meal__title='Обеды')
+        if subscription.dinner:
+            meal_data['Ужины'] = recipes.filter(meal__title='Ужины')
+        if subscription.dessert:
+            meal_data['Десерты'] = recipes.filter(meal__title='Десерты')
+
     return render(
         request=request,
         context={
             "user": request.user,
+            "subscription": subscription,
+            "count_meals": count_meals,
+            "meal_data": meal_data
         },
         template_name='account/lk.html'
     )

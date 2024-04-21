@@ -20,6 +20,7 @@
                 </a>
                 <a href="{% url 'logout' %}">
                 <button class="btn btn-outline-success shadow-none foodplan_green foodplan__border_green">Выйти</button>
+                </a>
             </div>
         </nav>
     </header>
@@ -42,7 +43,9 @@
                         </div>
                         <h3 class="card-title text-center">{{ user.username }}</h3>
                         <div class="d-block">
-                            <button class="btn btn-outline-success shadow-none foodplan_green foodplan__border_green">Выйти</button>
+                            <a href="{% url 'logout' %}">
+                                <button class="btn btn-outline-success shadow-none foodplan_green foodplan__border_green">Выйти</button>
+                            </a>
                         </div>
                     </div>
 
@@ -103,28 +106,35 @@
                                         <div class="col-10 col-md-10">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <h2>Название подписки</h2>
+                                                    <h2>{{ subscription.menu.title }}</h2>
                                                 </div>
                                                 <div class="col-md-12 col-lg-9">
-                                                    <h6>Описание подписки Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius saepe ea nobis necessitatibus
-                                                        consectetur rem! Eligendi assumenda facere sint quibusdam dolorem quasi doloribus nemo, temporibus molestiae
-                                                        distinctio cum laboriosam sed. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius saepe ea nobis
-                                                        necessitatibus consectetur rem! Eligendi
-                                                        assumenda facere sint quibusdam dolorem quasi doloribus nemo, temporibus molestiae distinctio cum laboriosam
-                                                        sed.</h6>
+                                                    {% for category, recipes_list in meal_data.items %}
+                                                        <h5>{{ category }}</h5>
+                                                        {% for recipe in recipes_list %}
+                                                            <h6><a href="{% url 'get_recipe' recipe.id %}">{{ recipe.title }}</a></h6>
+                                                        {% endfor %}
+                                                    {% empty %}
+                                                        <p>Нет доступных рецептов.</p>
+                                                    {% endfor %}
                                                 </div>
-                                                <div class="col-md-12 col-lg-3 text-muted d-flex flex-column justify-content-between">
+                                                <div class="col-md-12 col-lg-3 text-muted d-flex flex-column">
                                                     <div class="d-flex flex-row justify-content-between">
-                                                        <small>Персоны: </small><small>3</small>
+                                                        <small>Персоны: </small><small>{{ subscription.persons }}</small>
                                                     </div>
                                                     <div class="d-flex flex-row justify-content-between">
-                                                        <small>Аллергии: </small><small>нет</small>
+                                                        <small>Аллергии:
+                                                            {% if subscription.allergies.all %}
+                                                                {% for allergy in subscription.allergies.all %}
+                                                                    {{ allergy.title }}{% if not forloop.last %}, {% endif %}
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                нет
+                                                            {% endif %}
+                                                        </small>
                                                     </div>
                                                     <div class="d-flex flex-row justify-content-between">
-                                                        <small>Калории: </small><small>1400</small>
-                                                    </div>
-                                                    <div class="d-flex flex-row justify-content-between">
-                                                        <small>Кол-во приёмов пищи: </small><small>4</small>
+                                                        <small>Кол-во приёмов пищи: </small><small>{{ count_meals }}</small>
                                                     </div>
                                                     
                                                 </div>
