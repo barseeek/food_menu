@@ -63,28 +63,26 @@ def register_user(request):
 
 
 def account(request):
+    count_meals = 0
     try:
         subscription = Subscription.objects.get(user=request.user)
+        count_meals = (int(subscription.breakfast) + int(subscription.lunch) +
+                       int(subscription.dinner) + int(subscription.dessert))
     except (Subscription.DoesNotExist, Subscription.MultipleObjectsReturned):
         subscription = None
-        return render(
-            request=request,
-            template_name='orderapp/index.html'
-        )
-    count_meals = (int(subscription.breakfast) + int(subscription.lunch) +
-                   int(subscription.dinner) + int(subscription.dessert))
 
-
-    # Получаем список аллергий пользователя
-    user_allergies = subscription.allergies.all()
-
-    # Создаём список ID продуктов, которые вызывают аллергии
-    allergenic_product_ids = Product.objects.filter(allergy__in=user_allergies).values_list('id', flat=True)
-
-    # Фильтруем рецепты, исключая те, что содержат аллергенные продукты
-    recipes = Recipe.objects.filter(menu=subscription.menu).exclude(ingredients__product__id__in=allergenic_product_ids).distinct()
     meal_data = {}
     if subscription:
+        # Получаем список аллергий пользователя
+        user_allergies = subscription.allergies.all()
+
+        # Создаём список ID продуктов, которые вызывают аллергии
+        allergenic_product_ids = Product.objects.filter(allergy__in=user_allergies).values_list('id', flat=True)
+
+        # Фильтруем рецепты, исключая те, что содержат аллергенные продукты
+        recipes = (Recipe.objects.filter(menu=subscription.menu).
+                   exclude(ingredients__product__id__in=allergenic_product_ids).distinct())
+
         if subscription.breakfast:
             meal_data['Завтраки'] = recipes.filter(meal__title='Завтраки')
         if subscription.lunch:
