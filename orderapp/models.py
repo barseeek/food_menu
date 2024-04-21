@@ -169,6 +169,8 @@ class Subscription(models.Model):
         verbose_name='Включены дессерты',
         default=False
     )
+    user = models.ForeignKey('CustomUser', verbose_name='Пользователь', on_delete=models.CASCADE, related_name='subsciptions')
+    allergies = models.ManyToManyField(Allergy, verbose_name='Аллергии', related_name='allergies')
 
     def save(self, *args, **kwargs):
         self.end = self.start + relativedelta(months=int(self.months))
@@ -179,10 +181,12 @@ class Subscription(models.Model):
 
 
 class CustomUser(AbstractUser):
-    subscription = models.ForeignKey(
-        Subscription,
-        verbose_name='Подписка',
-        related_name='users',
-        on_delete=models.CASCADE,
-        null=True
-    )
+    pass
+    # subscription = models.ForeignKey(
+    #     Subscription,
+    #     verbose_name='Подписка',
+    #     related_name='users',
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True
+    # )

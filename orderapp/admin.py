@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from orderapp.models import CustomUser, Subscription, Ingredient, Recipe, Menu, \
-    Product, Meal
+    Product, Meal, Allergy
 
 
 class IngredientInline(admin.TabularInline):
@@ -40,4 +40,9 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Meal)
 class CategoryAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Allergy)
+class AllergyAdmin(admin.ModelAdmin):
     pass
