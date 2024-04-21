@@ -39,7 +39,7 @@
                         <div class="col-6 col-md-3">
                             <label for="classic" class="position-relative" style="cursor: pointer;">
                                 <img src="{% static 'img/menu_classical.png' %}" alt="" class="w-100">
-                                <input form="order" type="radio" name="foodtype" id="classic" value="classic" class="foodplan_selected d-none">
+                                <input form="order" type="radio" name="foodtype" id="classic" value="classic" class="foodplan_selected d-none" checked>
                                 <div class="img_selected" id="img1"></div>
                             </label>
                         </div>
@@ -73,7 +73,7 @@
                             <tr>
                                 <th scope="row" class="text-start">Срок</th>
                                 <td>
-                                    <select v-model="selected_date" @change="select_date" class="form-select">
+                                    <select form="order" name="period" v-model="selected_date" @change="select_date" class="form-select">
                                         {% for date_caption in vue_data.date %}
                                             {% if forloop.counter0 == 0 %}
                                                 <option value="{{ forloop.counter0 }}" selected>{{ date_caption.label }}</option>
@@ -90,8 +90,8 @@
                                     <th scope="row" class="text-start">{{ menu.label }}</th>
                                     <td>
                                         <select name="select{{ forloop.counter0 }}" @change="select_menu" class="form-select">
-                                            <option value="0" selected>&#10004;</option>
-                                            <option value="1">&#10008;</option>
+                                            <option value="1" selected>&#10004;</option>
+                                            <option value="0" >&#10008;</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -125,15 +125,18 @@
                             </tr>
                         </tbody>
                     </table>
+                    <input name="cost" type="hidden" v-model="Cost">
+
                     <button type="submit" id="TableSubmit" class="d-none"></button>
                     </form>
 
                     <form class="card d-flex flex-row align-items-baseline mb-5 p-3 foodplan__bg_grey">
                         <label for="exampleInputPassword1" class="form-label me-2">Промокод</label>
-                        <input type="password" class="form-control me-2" id="password">
+                        <input form="order" type="password" class="form-control me-2" id="password">
                         <button type="submit" class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Применить</button>
                     </form>
                     {% csrf_token %}
+
                     <div class="d-flex justify-content-center my-5">
                         <button form="order" type="submit" class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green w-50">Оплатить</button>
                     </div>

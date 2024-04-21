@@ -27,7 +27,7 @@ def create_yoo_payment(payment_amount, payment_currency, sub_period, metadata: d
             "return_url": settings.YOO_REDIRECT_URL,
         },
         "capture": True,
-        "description": f"Оформление подписки на срок {sub_period}",
+        "description": f"Оформление подписки на срок {sub_period} мес.",
     }, idempotence_key)
 
     return json.loads(payment.json())

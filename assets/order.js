@@ -30,7 +30,7 @@ Vue.createApp({
         },
         select_menu(event) {
             index = this.get_index(event);
-            this.menu_prices[index] = (event.target.value == 0) ? this.data.menu[index].price : 0;
+            this.menu_prices[index] = (event.target.value == 1) ? this.data.menu[index].price : 0;
         },
         select_allergy(event) {
             index = this.get_index(event);
