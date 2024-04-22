@@ -10,7 +10,7 @@ from dateutil.relativedelta import relativedelta
 class Product(models.Model):
     title = models.CharField(
         verbose_name='Название',
-        max_length=25
+        max_length=100
     )
     allergy = models.ForeignKey(
         'Allergy',
@@ -28,7 +28,7 @@ class Product(models.Model):
 class Menu(models.Model):
     title = models.CharField(
         verbose_name='Тип меню',
-        max_length=25
+        max_length=100
     )
 
     def __str__(self):
@@ -38,7 +38,7 @@ class Menu(models.Model):
 class Meal(models.Model):
     title = models.CharField(
         verbose_name='Категория (Время дня)',
-        max_length=25
+        max_length=100
     )
 
     def __str__(self):
@@ -107,7 +107,7 @@ class Ingredient(models.Model):
     )
     unit = models.CharField(
         verbose_name='Единица измерения (Количество)',
-        max_length=10,
+        max_length=100,
     )
     calories = models.FloatField(
         verbose_name='калории',
@@ -126,7 +126,7 @@ class Subscription(models.Model):
     )
     months = models.CharField(
         verbose_name='Количество месяцев',
-        max_length=5,
+        max_length=100,
         choices=[(str(i), str(i)) for i in [1, 3, 6, 12]],
         default='1'
     )
@@ -136,7 +136,7 @@ class Subscription(models.Model):
     )
     persons = models.CharField(
         verbose_name='Количество персон',
-        max_length=5,
+        max_length=100,
         choices=[(str(i), str(i)) for i in range(1, 7)],
         default='1'
     )
