@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-from orderapp.models import CustomUser, Subscription, Recipe, Product
+from orderapp.models import CustomUser, Subscription, Recipe, Product, Allergy
 
 
 def user_login(request):
@@ -75,9 +75,9 @@ def account(request):
     if subscription:
         # Получаем список аллергий пользователя
         user_allergies = subscription.allergies.all()
-
-        # Создаём список ID продуктов, которые вызывают аллергии
-        allergenic_product_ids = Product.objects.filter(allergy__in=user_allergies).values_list('id', flat=True)
+        allergenic_product_ids = []
+        if not user_allergies.contains(Allergy.objects.get(title="Нет")):
+            allergenic_product_ids = Product.objects.filter(allergy__in=user_allergies).values_list('id', flat=True)
 
         # Фильтруем рецепты, исключая те, что содержат аллергенные продукты
         recipes = (Recipe.objects.filter(menu=subscription.menu).
