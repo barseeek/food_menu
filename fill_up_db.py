@@ -72,17 +72,13 @@ def process_recipe(recipe_info):
     except Exception as err:
         print(err)
     else:
-        file_name = f'recipe_image_{recipe.id}.jpg'
-        file_path = os.path.join('media', file_name)
-        with open(file_path, 'wb') as image:
-            image.write(response.content)
-
-        recipe.image = file_path
+        img_temp = NamedTemporaryFile(delete=True)
+        img_temp.write(response.content)
+        img_temp.flush()
+        recipe.image.save(os.path.basename(recipe_info['image']),
+                          File(img_temp))
     finally:
         recipe.save()
-
-
-
 
 
 if __name__ == '__main__':
