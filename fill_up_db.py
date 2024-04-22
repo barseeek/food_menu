@@ -72,7 +72,7 @@ def process_recipe(recipe_info):
     except Exception as err:
         print(err)
     else:
-        img_temp = NamedTemporaryFile(delete=True)
+        img_temp = NamedTemporaryFile()
         img_temp.write(response.content)
         img_temp.flush()
         recipe.image.save(os.path.basename(recipe_info['image']),
@@ -83,7 +83,7 @@ def process_recipe(recipe_info):
 
 if __name__ == '__main__':
     json_file = 'combined_recipies.json'
-    with open(json_file, 'r') as f:
+    with open(json_file, 'r', encoding='utf-8') as f:
         recipies = json.load(f)
 
     for recipe in recipies:
