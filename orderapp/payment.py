@@ -10,7 +10,7 @@ Configuration.account_id = settings.YOO_SHOP_ID
 Configuration.secret_key = settings.YOO_API_TOKEN
 
 
-def create_yoo_payment(payment_amount, payment_currency, sub_period, metadata=None) -> dict:
+def create_yoo_payment(request, payment_amount, payment_currency, metadata) -> dict:
     if metadata is None:
         metadata = {}
     idempotence_key = str(uuid.uuid4())
@@ -29,7 +29,8 @@ def create_yoo_payment(payment_amount, payment_currency, sub_period, metadata=No
             "return_url": settings.YOO_REDIRECT_URL,
         },
         "capture": True,
-        "description": f"Оформление подписки на срок {sub_period} мес.",
+        "description": f"Оформление подписки",
     }, idempotence_key)
-
+    request.session["payment_id"] = payment["id"]
+    request.session["subscription_data"] = metadata.copy()
     return json.loads(payment.json())

@@ -1,11 +1,15 @@
 import datetime
+import json
 import random
+from time import sleep
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from yookassa import Payment
 
 from orderapp.models import Recipe, Menu, Subscription, Allergy
 from orderapp.payment import create_yoo_payment
@@ -80,12 +84,17 @@ def get_recipe(request, recipe_id):
 @login_required
 def make_payment(request):
     params = request.POST
-    duration_mapping = {
-        '0': 1,
-        '1': 3,
-        '2': 6,
-        '3': 12,
-    }
+
+    payment_amount = int(params["cost"])
+    try:
+        payment = create_yoo_payment(request, payment_amount, 'RUB', params)
+    except Exception as e:
+        return HttpResponse(f'Возникла ошибка при оплате {e}'.format(e=e))
+
+    return redirect(payment["confirmation"]["confirmation_url"], payment_id=payment["id"])
+
+
+def create_subscription(payment, subscription_data, user):
     menu_mapping = {
         'classic': 'Классическое',
         'low': 'Низкоуглеводное',
@@ -95,35 +104,54 @@ def make_payment(request):
     allergy_labels = [
         "Рыба и морепродукты", "Зерновые", "Продукты пчеловодства", "Орехи и бобовые", "Молочные продукты"
     ]
-
-    sub_period = duration_mapping[params.get('period', 0)]
-    payment_amount = int(params["cost"])
-    try:
-        payment = create_yoo_payment(payment_amount, 'RUB', sub_period, params)
-    except Exception as e:
-        return HttpResponse(f'Возникла ошибка при оплате {e}'.format(e=e))
-    menu, created = Menu.objects.get_or_create(title=menu_mapping[params.get('foodtype', 'classic')])
+    duration_mapping = {
+        '0': 1,
+        '1': 3,
+        '2': 6,
+        '3': 12,
+    }
+    sub_period = duration_mapping[subscription_data.get('period', 0)]
+    payment_amount = int(subscription_data["cost"])
+    menu, created = Menu.objects.get_or_create(title=menu_mapping[subscription_data.get('foodtype', 'classic')])
     new_subscription = Subscription.objects.create(
         months=str(sub_period),
-        persons=params.get('select_quantity', '1'),
-        cost=payment_amount,
+        persons=subscription_data.get('select_quantity', '1'),
+        cost=int(subscription_data.get('cost')),
         menu=menu,
-        breakfast=params.get('select0', "0") == "1",
-        lunch=params.get('select1', "0") == "1",
-        dinner=params.get('select2', "0") == "1",
-        dessert=params.get('select3', "0") == "1",
-        user=request.user
+        breakfast=subscription_data.get('select0', "0") == "1",
+        lunch=subscription_data.get('select1', "0") == "1",
+        dinner=subscription_data.get('select2', "0") == "1",
+        dessert=subscription_data.get('select3', "0") == "1",
+        user=user
     )
 
     selected_allergies = []
     for i in range(5):
-        if params.get(f'allergy{i}', '') == 'on':
+        if subscription_data.get(f'allergy{i}', '') == 'on':
             selected_allergies.append(allergy_labels[i])
-    if not selected_allergies:
+    if selected_allergies:
         allergies = Allergy.objects.filter(title='Нет')
     else:
         allergies = Allergy.objects.filter(title__in=selected_allergies)
     new_subscription.allergies.add(*allergies)
 
     new_subscription.save()
-    return redirect(payment["confirmation"]["confirmation_url"])
+
+
+@csrf_exempt
+@login_required
+def check_payment(request):
+    payment_id = request.session.get("payment_id")
+    subscription_data = request.session.get("subscription_data")
+    payment = json.loads((Payment.find_one(payment_id)).json())
+    # while payment['status'] == 'pending':
+    #     payment = json.loads((Payment.find_one(payment_id)).json())
+    #     sleep(3)
+
+    if payment['status'] == 'succeeded':
+        create_subscription(payment, subscription_data, request.user)
+        request.session['payment_data'] = None
+        request.session['subscription_data'] = None
+        return redirect(reverse('index'))
+    else:
+        return HttpResponse('Платеж не прошел, попробуйте еще раз')

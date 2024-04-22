@@ -132,7 +132,7 @@ AUTH_USER_MODEL = 'orderapp.CustomUser'
 
 YOO_SHOP_ID = env.str('YOO_SHOP_ID')
 YOO_API_TOKEN = env.str('YOO_API_TOKEN')
-YOO_REDIRECT_URL = "http://127.0.0.1:8000/"
+YOO_REDIRECT_URL = "http://127.0.0.1:8000/orderapp/check_payment/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
