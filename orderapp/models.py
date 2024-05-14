@@ -180,6 +180,7 @@ class Subscription(models.Model):
 @receiver(post_save, sender=Subscription)
 def subscription_saved(sender, instance, **kwargs):
     instance.end = instance.start + relativedelta(months=int(instance.months))
+    post_save.disconnect(subscription_saved, sender=sender)
     instance.save(update_fields=['end'])
 
 
