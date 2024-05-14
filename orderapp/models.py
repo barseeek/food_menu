@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
@@ -132,7 +134,6 @@ class Subscription(models.Model):
     )
     end = models.DateField(
         verbose_name='Конец подписки',
-        editable=False
     )
     persons = models.CharField(
         verbose_name='Количество персон',
@@ -172,12 +173,15 @@ class Subscription(models.Model):
     user = models.ForeignKey('CustomUser', verbose_name='Пользователь', on_delete=models.CASCADE, related_name='subsciptions')
     allergies = models.ManyToManyField(Allergy, verbose_name='Аллергии', related_name='allergies')
 
-    def save(self, *args, **kwargs):
-        self.end = self.start + relativedelta(months=int(self.months))
-        super(Subscription, self).save(*args, **kwargs)
-
     def __str__(self):
         return f'Подписка {self.menu} для {self.user.username} {self.user.first_name} {self.user.last_name}'
+
+
+@receiver(post_save, sender=Subscription)
+def subscription_saved(sender, instance, **kwargs):
+    instance.end = instance.start + relativedelta(months=int(instance.months))
+    post_save.disconnect(subscription_saved, sender=sender)
+    instance.save(update_fields=['end'])
 
 
 class CustomUser(AbstractUser):
